@@ -7,7 +7,7 @@ public class Aula {
     private final String day, start, finish, place, freq;
 
     public Aula(String day, String start, String finish, String place, String freq) {
-        this.day = day;
+        this.day = day.replace("-feira", "").toLowerCase();
         this.start = start;
         this.finish = finish;
         this.place = place.trim();

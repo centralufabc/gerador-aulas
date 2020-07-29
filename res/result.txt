@@ -10499,7 +10499,7 @@
         "freq": "",
         "finish": "10:00",
         "place": "Sala de Aula S - 303-1",
-        "day": "Terça-feira"
+        "day": "terça"
       }
     ],
     "pratica": [],
@@ -10517,7 +10517,7 @@
         "freq": "",
         "finish": "23:00",
         "place": "Sala de Aula S - 304-1",
-        "day": "Terça-feira"
+        "day": "terça"
       }
     ],
     "pratica": [],
@@ -10535,7 +10535,7 @@
         "freq": "",
         "finish": "10:00",
         "place": "Sala de Aula S-306-2",
-        "day": "Quarta-feira"
+        "day": "quarta"
       }
     ],
     "pratica": [],
@@ -10553,7 +10553,7 @@
         "freq": "",
         "finish": "21:00",
         "place": "Sala de Aula S-304-2",
-        "day": "Quarta-feira"
+        "day": "quarta"
       }
     ],
     "pratica": [],
@@ -10571,7 +10571,7 @@
         "freq": "",
         "finish": "12:00",
         "place": "Sala de Aula S - 304-1",
-        "day": "Sexta-feira"
+        "day": "sexta"
       }
     ],
     "pratica": [],
@@ -10589,7 +10589,7 @@
         "freq": "",
         "finish": "23:00",
         "place": "Sala de Aula S - 304-1",
-        "day": "Sexta-feira"
+        "day": "sexta"
       }
     ],
     "pratica": [],
@@ -10607,7 +10607,7 @@
         "freq": "",
         "finish": "12:00",
         "place": "Sala de Aula S - 304-1",
-        "day": "Sexta-feira"
+        "day": "sexta"
       }
     ],
     "pratica": [],
@@ -10625,7 +10625,7 @@
         "freq": "",
         "finish": "23:00",
         "place": "Sala de Aula S - 304-1",
-        "day": "Sexta-feira"
+        "day": "sexta"
       }
     ],
     "pratica": [],
@@ -10643,7 +10643,7 @@
         "freq": "",
         "finish": "23:00",
         "place": "Sala de Aula S - 303-1",
-        "day": "Terça-feira"
+        "day": "terça"
       }
     ],
     "pratica": [],
@@ -10661,7 +10661,7 @@
         "freq": "",
         "finish": "12:00",
         "place": "Sala de Aula S - 303-1",
-        "day": "Quinta-feira"
+        "day": "quinta"
       }
     ],
     "pratica": [],
@@ -10679,7 +10679,7 @@
         "freq": "",
         "finish": "23:00",
         "place": "Sala de Aula S - 303-1",
-        "day": "Quinta-feira"
+        "day": "quinta"
       }
     ],
     "pratica": [],
@@ -10697,7 +10697,7 @@
         "freq": "",
         "finish": "12:00",
         "place": "Sala de Aula S - 304-1",
-        "day": "Quinta-feira"
+        "day": "quinta"
       }
     ],
     "pratica": [],
@@ -10715,7 +10715,7 @@
         "freq": "",
         "finish": "23:00",
         "place": "Sala de Aula S - 305-1",
-        "day": "Terça-feira"
+        "day": "terça"
       }
     ],
     "pratica": [],
@@ -38657,7 +38657,7 @@
         "freq": "Semanal",
         "finish": "12:00",
         "place": "sala S301-1",
-        "day": "Sábado"
+        "day": "sábado"
       }
     ],
     "pratica": [],
@@ -51767,7 +51767,7 @@
         "freq": "",
         "finish": "12:00",
         "place": "Sala de Aula A2- S309-SB",
-        "day": "Quarta-feira"
+        "day": "quarta"
       }
     ],
     "pratica": [],
@@ -51785,7 +51785,7 @@
         "freq": "",
         "finish": "21:00",
         "place": "Sala de Aula A2- S309-SB",
-        "day": "Quarta-feira"
+        "day": "quarta"
       }
     ],
     "pratica": [],
@@ -51803,7 +51803,7 @@
         "freq": "",
         "finish": "12:00",
         "place": "Sala de Aula A1- S103-SB",
-        "day": "Quarta-feira"
+        "day": "quarta"
       }
     ],
     "pratica": [],
@@ -51821,7 +51821,7 @@
         "freq": "",
         "finish": "23:00",
         "place": "Sala de Aula A1- S104-SB",
-        "day": "Quarta-feira"
+        "day": "quarta"
       }
     ],
     "pratica": [],
