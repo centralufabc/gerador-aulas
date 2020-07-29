@@ -82,14 +82,16 @@ public class Generate {
             JSONArray classes = (JSONArray) data.get("respostas");
 
             for (Object aClass : classes) {
-                String codigo, sigla, titulo, teoria, pratica, docenteTeoria = "", docentePratica = "";
+                String codigo, sigla, titulo, docenteTeoria = "", docentePratica = "";
+                ArrayList<Aula> teoria, pratica;
                 JSONObject classe = (JSONObject) aClass;
 
                 // Dados da turma
                 codigo = classe.get("Código").toString();
                 titulo = classe.get("Disicplina - turma").toString();
-                teoria = classe.get("teoria").toString();
-                pratica = classe.get("prática").toString();
+
+                teoria = getAulasFromString(classe.get("teoria").toString());
+                pratica = getAulasFromString(classe.get("prática").toString());
 
                 if (classe.get("docente  teoria") != null) {
                     docenteTeoria = classe.get("docente  teoria").toString();
@@ -137,8 +139,8 @@ public class Generate {
             turmaJson.put("codigo", turma.getCodigo());
             turmaJson.put("sigla", turma.getSigla());
             turmaJson.put("classe", turma.getTitulo());
-            turmaJson.put("teoria", turma.getTeoria());
-            turmaJson.put("pratica", turma.getPratica());
+            turmaJson.put("teoria", turma.getTeoriaAsJSONArray());
+            turmaJson.put("pratica", turma.getPraticaAsJSONArray());
             turmaJson.put("docenteTeoria", turma.getDocenteTeoria());
             turmaJson.put("docentePratica", turma.getDocentePratica());
 
@@ -189,6 +191,44 @@ public class Generate {
         }
 
         return null;
+    }
+
+    // Split raw string into individual chunks. Raw string has this format:
+    // segunda das 19:00 às 21:00, sala S-304-2, semanal , quarta das 21:00 às 23:00, sala S-304-2, quinzenal I
+    // One chunk has the following format:
+    // segunda das 19:00 às 21:00, sala S-304-2, semanal
+    // Split chunks on every third comma
+    private static ArrayList<Aula> getAulasFromString(String raw) {
+
+        ArrayList<Aula> aulas = new ArrayList<>();
+
+        if(raw.equals("0")) {
+            return aulas;
+        }
+
+        String[] rawSplitted = raw.split(",");
+
+        for(int i = 0; i < rawSplitted.length; i += 3) {
+            String dayAndTime = rawSplitted[i];
+            String place = rawSplitted[i + 1];
+
+            String freq = "";
+            if(i + 2 < rawSplitted.length) {
+                freq = rawSplitted[i + 2];
+            }
+
+            String[] splittedDayAndTime = dayAndTime.split(" das ");
+            String day = splittedDayAndTime[0];
+            String time = splittedDayAndTime[1];
+
+            String[] splittedTime = time.split(" às ");
+            String start = splittedTime[0];
+            String finish = splittedTime[1];
+
+            aulas.add(new Aula(day, start, finish, place, freq));
+        }
+
+        return aulas;
     }
 
     //Convert the file that contains th data into a String, so it can be parsed

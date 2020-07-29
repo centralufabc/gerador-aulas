@@ -1,11 +1,16 @@
 
 package central;
 
+import org.json.simple.JSONArray;
+
+import java.util.ArrayList;
+
 public class Turma {
     
-    String codigo, sigla, titulo, teoria, pratica, docenteTeoria, docentePratica;
+    private final String codigo, sigla, titulo, docenteTeoria, docentePratica;
+    private final ArrayList<Aula> teoria, pratica;
     
-    public Turma(String codigo, String sigla, String titulo, String teoria, String pratica, String docenteTeoria, String docentePratica){
+    public Turma(String codigo, String sigla, String titulo, ArrayList<Aula> teoria, ArrayList<Aula> pratica, String docenteTeoria, String docentePratica){
         this.codigo = codigo;
         this.sigla = sigla;
         this.titulo = titulo;
@@ -25,11 +30,11 @@ public class Turma {
         return titulo;
     }
     
-    public String getTeoria(){
+    public ArrayList<Aula> getTeoria(){
         return teoria;
     }
     
-    public String getPratica(){
+    public ArrayList<Aula> getPratica(){
         return pratica;
     }
         
@@ -39,5 +44,23 @@ public class Turma {
             
     public String getDocentePratica(){
         return docentePratica;
+    }
+
+    public JSONArray getTeoriaAsJSONArray() {
+        return getAulasAsJSONArray(this.teoria);
+    }
+
+    public JSONArray getPraticaAsJSONArray() {
+        return getAulasAsJSONArray(this.pratica);
+    }
+
+    private JSONArray getAulasAsJSONArray(ArrayList<Aula> aulas) {
+        JSONArray array = new JSONArray();
+
+        for(Aula aula : aulas) {
+            array.add(aula.getJSONObject());
+        }
+
+        return array;
     }
 }
