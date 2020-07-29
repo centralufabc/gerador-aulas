@@ -11,20 +11,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 /**
- *
  * @author rodrigo98rm
  */
 public class Generate {
 
     private static String MATRICULAS = "";
     private static String TURMAS = "";
-    private static ArrayList<Aluno> alunos = new ArrayList<Aluno>();
-    private static ArrayList<Turma> turmas = new ArrayList<Turma>();
+    private static ArrayList<Aluno> alunos = new ArrayList<>();
+    private static ArrayList<Turma> turmas = new ArrayList<>();
 
     public static void main(String[] args) {
 
@@ -43,8 +43,8 @@ public class Generate {
             String codigo;
 
             // Percorrer a lista de matriculas
-            for (int i = 0; i < matriculas.size(); i++) {
-                JSONObject matricula = (JSONObject) matriculas.get(i);
+            for (Object o : matriculas) {
+                JSONObject matricula = (JSONObject) o;
                 ra = matricula.get("RA").toString();
                 codigo = matricula.get("CÓDIGO TURMA").toString();
 
@@ -61,7 +61,7 @@ public class Generate {
                     alunos.add(aluno);
                 }
             }
-            
+
             System.out.println("Número de alunos: " + alunos.size());
 
             // Verificacao de alunos criados no array
@@ -81,27 +81,33 @@ public class Generate {
             JSONObject data = (JSONObject) obj;
             JSONArray classes = (JSONArray) data.get("respostas");
 
-            for (int i = 0; i < classes.size(); i++) {
-                String codigo = "", titulo = "", teoria = "", pratica = "", docenteTeoria = "", docentePratica = "";
-                JSONObject classe = (JSONObject) classes.get(i);
-                
+            for (Object aClass : classes) {
+                String codigo, sigla, titulo, teoria, pratica, docenteTeoria = "", docentePratica = "";
+                JSONObject classe = (JSONObject) aClass;
+
                 // Dados da turma
                 codigo = classe.get("Código").toString();
                 titulo = classe.get("Disicplina - turma").toString();
                 teoria = classe.get("teoria").toString();
                 pratica = classe.get("prática").toString();
-                
-                if(classe.get("docente  teoria") != null){
+
+                if (classe.get("docente  teoria") != null) {
                     docenteTeoria = classe.get("docente  teoria").toString();
                 }
-                
-                if(classe.get("docente prática") != null){
+
+                if (classe.get("docente prática") != null) {
                     docentePratica = classe.get("docente prática").toString();
                 }
 
-                turmas.add(new Turma(codigo, titulo, teoria, pratica, docenteTeoria, docentePratica));
+                if(codigo.length() == 14) {
+                    sigla = codigo.substring(2, codigo.length() - 2);
+                } else {
+                    sigla = codigo.substring(3, codigo.length() - 2);
+                }
+
+                turmas.add(new Turma(codigo, sigla, titulo, teoria, pratica, docenteTeoria, docentePratica));
             }
-            
+
             System.out.println("Número de turmas: " + turmas.size());
 
         } catch (Exception e) {
@@ -119,50 +125,49 @@ public class Generate {
 
         // Gerar resultado com lista de turmas e RAs dos alunos matriculas em cada uma
         JSONArray root = new JSONArray();
-        
+
         // Para cada turma, criar um objeto dentro do JSONArray e
         // encontrar todos os alunos que estão matriculados nela
-        for(int i = 0; i < turmas.size(); i++){
-            
-            Turma turma = turmas.get(i);
-            
+        for (Turma turma : turmas) {
+
             JSONObject turmaJson = new JSONObject();
             JSONArray listaRAs = new JSONArray();
-            
+
             // Dados da turma
             turmaJson.put("codigo", turma.getCodigo());
+            turmaJson.put("sigla", turma.getSigla());
             turmaJson.put("classe", turma.getTitulo());
             turmaJson.put("teoria", turma.getTeoria());
             turmaJson.put("pratica", turma.getPratica());
             turmaJson.put("docenteTeoria", turma.getDocenteTeoria());
             turmaJson.put("docentePratica", turma.getDocentePratica());
-            
+
             // Obter lista de alunos matriculados na turma
-            
+
             // Para cada aluno
-            for(int j = 0; j < alunos.size(); j++){
+            for (int j = 0; j < alunos.size(); j++) {
                 Aluno aluno = alunos.get(j);
-                
+
                 // Disciplinas do aluno
                 ArrayList<String> codigos = aluno.getCodigos();
-                
-                
+
+
                 // Para cada disciplina em que o aluno esta matriculado
-                for(int k = 0; k < codigos.size(); k++){
+                for (int k = 0; k < codigos.size(); k++) {
                     String codigo = codigos.get(k);
-                    if(codigo.equals(turma.getCodigo())){
+                    if (codigo.equals(turma.getCodigo())) {
                         listaRAs.add(aluno.getRa());
                     }
                 }
             }
-            
+
             // Adicionar array de RAs na turma
             turmaJson.put("lista_ra", listaRAs);
-            
+
             // Adicionar turma na lista final de turmas
             root.add(turmaJson);
         }
-        
+
         // Gerar o arquivo final
         try (FileWriter file = new FileWriter("res/result.txt")) {
             file.write(root.toJSONString());

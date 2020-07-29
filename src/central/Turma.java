@@ -3,10 +3,11 @@ package central;
 
 public class Turma {
     
-    String codigo, titulo, teoria, pratica, docenteTeoria, docentePratica;
+    String codigo, sigla, titulo, teoria, pratica, docenteTeoria, docentePratica;
     
-    public Turma(String codigo, String titulo, String teoria, String pratica, String docenteTeoria, String docentePratica){
+    public Turma(String codigo, String sigla, String titulo, String teoria, String pratica, String docenteTeoria, String docentePratica){
         this.codigo = codigo;
+        this.sigla = sigla;
         this.titulo = titulo;
         this.teoria = teoria;
         this.pratica = pratica;
@@ -17,6 +18,8 @@ public class Turma {
     public String getCodigo(){
         return codigo;
     }
+
+    public String getSigla() { return sigla; }
     
     public String getTitulo(){
         return titulo;
