@@ -136,13 +136,13 @@ public class Generate {
             JSONArray listaRAs = new JSONArray();
 
             // Dados da turma
-            turmaJson.put("codigo", turma.getCodigo());
-            turmaJson.put("sigla", turma.getSigla());
-            turmaJson.put("classe", turma.getTitulo());
-            turmaJson.put("teoria", turma.getTeoriaAsJSONArray());
-            turmaJson.put("pratica", turma.getPraticaAsJSONArray());
-            turmaJson.put("docenteTeoria", turma.getDocenteTeoria());
-            turmaJson.put("docentePratica", turma.getDocentePratica());
+            turmaJson.put("code", turma.getCodigo());
+            turmaJson.put("acronym", turma.getSigla());
+            turmaJson.put("class", turma.getTitulo());
+            turmaJson.put("theory", turma.getTeoriaAsJSONArray());
+            turmaJson.put("practice", turma.getPraticaAsJSONArray());
+            turmaJson.put("theoryProfessor", turma.getDocenteTeoria());
+            turmaJson.put("practiceProfessor", turma.getDocentePratica());
 
             // Obter lista de alunos matriculados na turma
 
@@ -164,7 +164,7 @@ public class Generate {
             }
 
             // Adicionar array de RAs na turma
-            turmaJson.put("lista_ra", listaRAs);
+            turmaJson.put("raList", listaRAs);
 
             // Adicionar turma na lista final de turmas
             root.add(turmaJson);
